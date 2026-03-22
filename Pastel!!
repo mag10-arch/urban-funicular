@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Interactive App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background 0.5s, color 0.5s;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5em;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    nav button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+    .hidden {
+      display: none;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #333;
+    }
+    .theme-button {
+      margin-top: 20px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+<header>My Interactive App</header>
+
+<nav>
+  <button onclick="showPage('home')">Home</button>
+  <button onclick="showPage('fun')">Fun Messages</button>
+</nav>
+
+<main>
+  <section id="home">
+    <h2>Welcome!</h2>
+    <p>This is your cool interactive app. Explore the buttons and switch themes!</p>
+  </section>
+
+  <section id="fun" class="hidden">
+    <h2>Fun Messages</h2>
+    <p>Click the button below for a random message:</p>
+    <button id="magicBtn">Click Me!</button>
+    <div id="output"></div>
+    <div>
+      <button class="theme-button" onclick="setTheme('light')">Light Theme</button>
+      <button class="theme-button" onclick="setTheme('dark')">Dark Theme</button>
+      <button class="theme-button" onclick="setTheme('colorful')">Colorful Theme</button>
+    </div>
+  </section>
+</main>
+
+<script>
+  // Page switcher
+  function showPage(pageId) {
+    document.querySelectorAll('main section').forEach(sec => sec.classList.add('hidden'));
+    document.getElementById(pageId).classList.remove('hidden');
+  }
+
+  // Random messages
+  const btn = document.getElementById('magicBtn');
+  const output = document.getElementById('output');
+  const messages = [
+    "Hello, friend! 👋",
+    "You did it! 🎉",
+    "Keep going! 💪",
+    "Coding is fun! 💻",
+    "You're awesome! 😎"
+  ];
+
+  btn.addEventListener('click', () => {
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    output.textContent = randomMessage;
+  });
+
+  // Theme changer
+  function setTheme(theme) {
+    if(theme === 'light') {
+      document.body.style.background = '#f0f0f0';
+      document.body.style.color = '#000';
+    } else if(theme === 'dark') {
+      document.body.style.background = '#222';
+      document.body.style.color = '#fff';
+    } else if(theme === 'colorful') {
+      document.body.style.background = 'linear-gradient(to right, #ff7e5f, #feb47b)';
+      document.body.style.color = '#fff';
+    }
+  }
+</script>
+
+</body>
+</html>
